@@ -30,8 +30,13 @@ get '/:username' do
 
   @tweets = @user.tweets.limit(10)
 
-  erb :recent_tweets
+  if request.xhr?
+    erb :_recent_tweets, layout: false
+  else
+    erb :recent_tweets
+  end
 end
+
 
 # POST =======================================================================
 

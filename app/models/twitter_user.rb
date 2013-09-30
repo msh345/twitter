@@ -4,9 +4,8 @@ class TwitterUser < ActiveRecord::Base
   def fetch_tweets!
     tweets = Twitter.user_timeline(self.handle)
     tweets.each do |tweet|
-      self.tweets << Tweet.create(tweet: tweet.text)
+      self.tweets << Tweet.find_or_create_by_tweet(tweet.text)
     end
-    tweets
   end
 
   def tweets_stale?

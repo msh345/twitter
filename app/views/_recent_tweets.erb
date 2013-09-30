@@ -1,7 +1,8 @@
-<h1>Recent Tweets</h1>
-
 <ul>
+  <% n = 0 %>
   <% @tweets.each do |tweet| %>
+    <% n += 1 %>
     <li><%= tweet.tweet  %></li>
+    <% break if n == 10 %>
   <% end %>
 </ul>
