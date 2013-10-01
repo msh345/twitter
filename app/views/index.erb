@@ -1,9 +1,10 @@
 <div class="container">
-<h1>Recent Tweets</h1>
+<h1>Tweet Now!</h1>
 
-<p>Get the 10 most recent tweets for any twitter user</p>
+<h3>Hello, <%= @user %>!</h3>
+<p>Tweet directly to Twitter using this form:</p>
 <form action="/" method="POST">
-  <input type="text" name="username"> 
+  <input type="text" name="tweet"> 
   <input type="submit">
 </form>
 

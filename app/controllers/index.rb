@@ -1,5 +1,6 @@
 get '/' do
-  # Look in app/views/index.erb
+  @user = "Mark Horowitz"
+
   erb :index
 end
 
@@ -21,15 +22,25 @@ end
 # end
 
 
-get '/:username' do
-  @user = TwitterUser.find_by_handle(params[:username])
+# get '/:username' do
+#   @user = TwitterUser.find_by_handle(params[:username])
   
-  if @user.tweets_stale?
-    @user.fetch_tweets!
-  end
+#   if @user.tweets_stale?
+#     @user.fetch_tweets!
+#   end
 
-  @tweets = @user.tweets.limit(10)
+#   @tweets = @user.tweets.limit(10)
 
+#   if request.xhr?
+#     erb :_recent_tweets, layout: false
+#   else
+#     erb :recent_tweets
+#   end
+# end
+
+
+get '/:tweet' do
+  @tweet = params[:tweet]
   if request.xhr?
     erb :_recent_tweets, layout: false
   else
@@ -38,10 +49,10 @@ get '/:username' do
 end
 
 
+
 # POST =======================================================================
 
 post '/' do
-  TwitterUser.create(:handle => params[:username])
-
-  redirect "/#{params[:username]}"
+  Twitter.update(params[:tweet])
+  redirect to "/#{params[:tweet]}"
 end
