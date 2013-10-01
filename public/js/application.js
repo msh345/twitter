@@ -5,7 +5,7 @@ $(document).ready(function() {
     var data = $('form').serialize()
     $.post('/',data,function(response) {
       $('form').after(response)
-      $('input').val('')
+      $('form').find('input[name="tweet"]').val('')
       $('img').hide()
     })
     
